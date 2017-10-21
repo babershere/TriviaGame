@@ -7,27 +7,63 @@
 
 
 
-//create var questions
-//create an array of at least 3 questions
+
 //create a timer
 
-//variables 
-
-// var questions
-
+//create question call out
 //functions
 // function questions (){}
 //code
+//Variables
+var intervalId;
+var time = 5 
+var clockRunning = false
 
-$(document).on("change",'input[name="q1"]',function(e){
-	console.log(this.value);
+//timer counter
+function count() {
+    time--;
+    $("#display").text(time);
+    if (time === 0) {
+        stop()
+        alert("Times up!")
+    }
+}
+
+
+//timer start
+function start() {
+    if (!clockRunning) {
+        intervalId = setInterval(count, 1000);
+        clockRunning = true;
+    }
+
+}
+//timer stop
+function stop() {
+    clearInterval(intervalId);
+    clockRunning = false
+}
+
+
+//start script on load
+$(window).on("load", function() {
+
+    //Click the button to start timer
+    $(".start").click(start);
+
+        $(document).on("change", 'input[name="q1"]', function(e) {
+            console.log(this.value);
+        });
+
+        $(document).on("change", 'input[name="q2"]', function(e) {
+            console.log(this.value, "this is answer two");
+        });
+
+        $(document).on("change", 'input[name="q3"]', function(e) {
+            console.log(this.value, "this is answer three");
+        });
+
+
+$(".submit").click(stop);
+
 });
-
-$(document).on("change",'input[name="q2"]',function(e){
-	console.log(this.value, "this is answer two");
-});
-
-$(document).on("change",'input[name="q3"]',function(e){
-	console.log(this.value, "this is answer three");
-});
-
